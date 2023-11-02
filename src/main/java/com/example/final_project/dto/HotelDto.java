@@ -8,5 +8,8 @@ import java.util.List;
 @Data
 public class HotelDto {
     private Long id;
+
     private String name;
+
+    private Integer numberOfFloors;
 }

@@ -5,5 +5,8 @@ import lombok.Data;
 @Data
 public class RoomDto {
     private Long id;
-    private Short roomNumber;
+
+    private Integer roomNumber;
+
+    private Integer roomLevel;
 }
