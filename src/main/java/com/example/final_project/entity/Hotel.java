@@ -2,7 +2,10 @@ package com.example.final_project.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -16,7 +19,15 @@ public class Hotel {
     @Column(name = "hotel_name")
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "hotel")
-    @JoinColumn(name = "room_numbers")
-    private List<Room> room;
+    @Column(name = "number of floors")
+    private Integer numberOfFloors;
+
+    @CreationTimestamp
+    private LocalDateTime cts;
+
+    @UpdateTimestamp
+    private LocalDateTime uts;
+
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "hotel")
+//    private List<Room> room;
 }
