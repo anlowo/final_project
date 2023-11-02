@@ -17,6 +17,5 @@ public class Hotel {
     private String name;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "hotel")
-    @JoinColumn(name = "room_numbers")
     private List<Room> room;
 }

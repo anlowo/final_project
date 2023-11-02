@@ -14,7 +14,7 @@ public class Room {
     @Column(name = "room_number")
     private Short roomNumber;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "hotel_id")
     private Hotel hotel;
 }
