@@ -10,6 +10,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -22,12 +23,41 @@ public class RoomInformationServiceImpl implements RoomInformationService {
     @Autowired
     private RoomRepository roomRepository;
 
+
+//    @Override
+//    public RoomInformation createRoomInformation(RoomInformationDto roomInformationDto, Long roomId) {
+//        Optional<Room> roomOptional = roomRepository.findById(roomId);
+//
+//        if (roomOptional.isPresent()) {
+//            Room room = roomOptional.get();
+//
+//            RoomInformation roomInformation = new RoomInformation();
+//
+//            roomInformation.setRoomType(roomInformationDto.getRoomType());
+//            roomInformation.setRoomCapacity(roomInformationDto.getRoomCapacity());
+//            roomInformation.setBedCount(roomInformationDto.getBedCount());
+//            roomInformation.setBedType(roomInformationDto.getBedType());
+//
+//            roomInformation.getRoom().add(room);
+//
+//            roomInformationRepository.save(roomInformation);
+//
+//            return roomInformation;
+//        } else {
+//            throw new EntityNotFoundException("Room with ID " + roomId + " not found");
+//        }
+//    }
+
     @Override
     public RoomInformation createRoomInformation(RoomInformationDto roomInformationDto, Long roomId) {
-        Optional<Room> roomOptional = roomRepository.findById(roomId);
+        List<Room> roomList = roomRepository.findAll();
 
-        if (roomOptional.isPresent()) {
-            Room room = roomOptional.get();
+        if (roomList.isEmpty()) {
+            throw new EntityNotFoundException("Rooms null");
+        } else {
+            roomList = roomRepository.findByIdInList(roomId)
+                    .orElseThrow(() -> new EntityNotFoundException
+                            ("Rooms with " + roomId + " id not found"));
 
             RoomInformation roomInformation = new RoomInformation();
 
@@ -36,13 +66,11 @@ public class RoomInformationServiceImpl implements RoomInformationService {
             roomInformation.setBedCount(roomInformationDto.getBedCount());
             roomInformation.setBedType(roomInformationDto.getBedType());
 
-            roomInformation.getRoom().add(room);
+            roomInformation.getRoom().add((Room) roomList);
 
             roomInformationRepository.save(roomInformation);
 
             return roomInformation;
-        } else {
-            throw new EntityNotFoundException("Room with ID " + roomId + " not found");
         }
     }
 

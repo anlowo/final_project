@@ -14,8 +14,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/room_information")
 public class RoomInformationController {
+    private final RoomInformationService roomInformationService;
+
     @Autowired
-    private RoomInformationService roomInformationService;
+    public RoomInformationController(RoomInformationService roomInformationService) {
+        this.roomInformationService = roomInformationService;
+    }
 
     @PostMapping("/add")
     public ResponseEntity<RoomInformation> addRoomInformation(@RequestBody RoomInformationDto roomInformationDto, @RequestParam Long roomId) {
@@ -36,7 +40,7 @@ public class RoomInformationController {
 
     @PutMapping("/{id}")
     public ResponseEntity<RoomInformation> updateRoomInformation(@RequestBody RoomInformationDto roomInformationDto, @PathVariable Long id) {
-        RoomInformation roomInformation = roomInformationService.createRoomInformation(roomInformationDto, id);
+        RoomInformation roomInformation = roomInformationService.updateRoomInformation(id, roomInformationDto);
         return ResponseEntity.ok(roomInformation);
     }
 
