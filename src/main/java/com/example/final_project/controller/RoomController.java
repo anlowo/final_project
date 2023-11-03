@@ -12,16 +12,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/rooms")
 public class RoomController {
-    private final RoomService roomService;
-
     @Autowired
-    public RoomController(RoomService roomService) {
-        this.roomService = roomService;
-    }
+    private RoomService roomService;
 
     @PostMapping("/add")
-    public ResponseEntity<Room> addRoom(@RequestBody RoomDto roomDto, @RequestParam Long hotelId) {
-        Room room = roomService.createRooms(roomDto, hotelId);
+    public ResponseEntity<Room> addRoom(@RequestBody RoomDto roomDto, @RequestParam Long hotelId, @RequestParam Long roomInformationId) {
+        Room room = roomService.createRooms(roomDto, hotelId, roomInformationId);
         return ResponseEntity.ok(room);
     }
 

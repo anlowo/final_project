@@ -7,5 +7,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface RoomRepository extends JpaRepository<Room, Long> {
-    Optional<List<Room>> findByIdInList(Long roomId);
+//    List<Room> findByIdQ(Long roomId);
 }

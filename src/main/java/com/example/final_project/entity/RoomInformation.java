@@ -26,7 +26,4 @@ public class RoomInformation {
 
     @Column(name = "room_capacity")
     private Integer roomCapacity;
-
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<Room> room;
 }

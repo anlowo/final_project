@@ -6,7 +6,9 @@ import com.example.final_project.entity.RoomInformation;
 import java.util.List;
 
 public interface RoomInformationService {
-    RoomInformation createRoomInformation(RoomInformationDto roomInformationDto, Long roomId);
+//    RoomInformation createRoomInformation(RoomInformationDto roomInformationDto, Long roomId);
+
+    RoomInformation createInformation(RoomInformationDto roomInformationDto);
 
     RoomInformation getroomInformation(Long id);
 

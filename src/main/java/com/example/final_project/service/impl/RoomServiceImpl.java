@@ -3,7 +3,9 @@ package com.example.final_project.service.impl;
 import com.example.final_project.dto.RoomDto;
 import com.example.final_project.entity.Hotel;
 import com.example.final_project.entity.Room;
+import com.example.final_project.entity.RoomInformation;
 import com.example.final_project.repository.HotelRepository;
+import com.example.final_project.repository.RoomInformationRepository;
 import com.example.final_project.repository.RoomRepository;
 import com.example.final_project.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,16 +22,23 @@ public class RoomServiceImpl implements RoomService {
     @Autowired
     private RoomRepository roomRepository;
 
+    @Autowired
+    private RoomInformationRepository roomInformationRepository;
+
     @Override
-    public Room createRooms(RoomDto roomDto, Long hotelId) {
+    public Room createRooms(RoomDto roomDto, Long hotelId, Long roomInformationId) {
         Room room = new Room();
         room.setRoomNumber(roomDto.getRoomNumber());
         room.setRoomLevel(roomDto.getRoomLevel());
 
         Hotel hotel = hotelRepository.findById(hotelId)
-                .orElseThrow(() -> new RuntimeException("Rooms with " + hotelId + " id not found"));
+                .orElseThrow(() -> new RuntimeException("Hotel with " + hotelId + " id not found"));
+
+        RoomInformation roomInformation = roomInformationRepository.findById(roomInformationId)
+                .orElseThrow(() -> new RuntimeException("Rooms information with " + roomInformationId + " id not found"));
 
         room.setHotel(hotel);
+        room.setRoomInformation(roomInformation);
 
         return roomRepository.save(room);
     }

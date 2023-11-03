@@ -22,8 +22,8 @@ public class RoomInformationController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<RoomInformation> addRoomInformation(@RequestBody RoomInformationDto roomInformationDto, @RequestParam Long roomId) {
-        RoomInformation roomInformation = roomInformationService.createRoomInformation(roomInformationDto, roomId);
+    public ResponseEntity<RoomInformation> addRoomInformation(@RequestBody RoomInformationDto roomInformationDto) {
+        RoomInformation roomInformation = roomInformationService.createInformation(roomInformationDto);
         return ResponseEntity.ok(roomInformation);
     }
 

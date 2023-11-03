@@ -30,4 +30,8 @@ public class Room {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "hotel_id")
     private Hotel hotel;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "room_information_id")
+    private RoomInformation roomInformation;
 }
