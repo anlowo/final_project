@@ -3,6 +3,7 @@ package com.example.final_project.entity;
 import com.example.final_project.entity.enums.Roles;
 import jakarta.persistence.*;
 import lombok.Data;
+//import org.springframework.security.core.userdetails.UserDetails;
 //import org.springframework.security.core.GrantedAuthority;
 //import org.springframework.security.core.userdetails.UserDetails;
 
@@ -50,6 +51,7 @@ public class User
     public boolean isAdmin() {
         return roles.contains(Roles.ADMIN);
     }
+
 //    @Override
 //    public Collection<? extends GrantedAuthority> getAuthorities() {
 //        return getRoles();

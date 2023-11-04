@@ -1,4 +1,4 @@
-package com.example.final_project.controller;
+package com.example.final_project.controller.entityControllers;
 
 import com.example.final_project.dto.RoomDto;
 import com.example.final_project.dto.RoomInformationDto;

@@ -3,7 +3,6 @@
 //import com.example.final_project.entity.User;
 //import com.example.final_project.entity.enums.Roles;
 //import com.example.final_project.repository.UserRepository;
-//import com.example.final_project.service.MailSenderService;
 //import com.example.final_project.service.UserService;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.core.userdetails.UserDetails;
@@ -22,20 +21,19 @@
 //    @Autowired
 //    private UserRepository repository;
 //
-//    @Autowired
-//    private MailSenderService mailSenderService;
-//
 //    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(8);
 //
 //    @Override
-//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//        return repository.findByUsername(username)
+//    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+//        return repository.findByLogin(login)
 //                .orElseThrow(() -> new RuntimeException("User not found"));
 //    }
 //
+//    @Override
 //    public boolean addUser(User user) {
-//        User userFromDb = repository.findByUsername(user.getUsername())
-//                .orElseThrow(() -> new RuntimeException("User not found"));
+//        User userFromDb = repository.findByLogin(user.getUsername())
+//                .orElseThrow(() -> new RuntimeException("User with login "
+//                        + user.getUsername() + " not found"));
 //
 //        user.setActive(true);
 //        user.setRoles(Collections.singleton(Roles.USER));
@@ -44,24 +42,21 @@
 //
 //        repository.save(user);
 //
-//        sendMessage(user);
-//
 //        return true;
 //    }
 //
-//    private void sendMessage(User user) {
-//        if (!StringUtils.isEmpty(user.getEmail())) {
-//            String message = String.format(
-//                    "Hello, %s! \n" +
-//                            "Welcome to Sweater. Please, visit next link: http://localhost:8080/activate/%s",
-//                    user.getUsername(),
-//                    user.getActivationCode()
-//            );
+////    private void sendMessage(User user) {
+////        if (!StringUtils.isEmpty(user.getEmail())) {
+////            String message = String.format(
+////                    "Hello, %s! \n" +
+////                            "Welcome to Sweater. Please, visit next link: http://localhost:8080/activate/%s",
+////                    user.getUsername(),
+////                    user.getActivationCode()
+////            );
+////        }
+////    }
 //
-//            mailSenderService.send(user.getEmail(), "Activation code", message);
-//        }
-//    }
-//
+//    @Override
 //    public boolean activateUser(String code) {
 //        User user = repository.findByActivationCode(code);
 //
@@ -76,10 +71,12 @@
 //        return true;
 //    }
 //
+//    @Override
 //    public List<User> findAll() {
 //        return repository.findAll();
 //    }
 //
+//    @Override
 //    public void saveUser(User user, String login, Map<String, String> form) {
 //        user.setLogin(login);
 //
@@ -98,6 +95,7 @@
 //        repository.save(user);
 //    }
 //
+//    @Override
 //    public void updateProfile(User user, String password, String email) {
 //        String userEmail = user.getEmail();
 //
@@ -117,9 +115,5 @@
 //        }
 //
 //        repository.save(user);
-//
-//        if (isEmailChanged) {
-//            sendMessage(user);
-//        }
 //    }
 //}
