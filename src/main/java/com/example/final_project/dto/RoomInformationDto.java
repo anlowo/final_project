@@ -2,7 +2,6 @@ package com.example.final_project.dto;
 
 import com.example.final_project.entity.roomEnums.BedType;
 import com.example.final_project.entity.roomEnums.RoomType;
-import jakarta.persistence.Column;
 import lombok.Data;
 
 @Data

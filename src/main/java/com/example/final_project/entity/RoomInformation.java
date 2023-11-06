@@ -2,7 +2,7 @@ package com.example.final_project.entity;
 
 import com.example.final_project.entity.roomEnums.BedType;
 import com.example.final_project.entity.roomEnums.RoomType;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Data;
 
 import java.util.List;
