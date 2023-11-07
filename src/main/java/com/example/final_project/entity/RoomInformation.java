@@ -15,12 +15,14 @@ public class RoomInformation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Enumerated
     @Column(name = "room_type")
     private RoomType roomType;
 
     @Column(name = "bed_count")
     private Integer bedCount;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "bed_type")
     private BedType bedType;
 
