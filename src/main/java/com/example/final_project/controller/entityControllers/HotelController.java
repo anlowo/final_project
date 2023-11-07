@@ -1,4 +1,4 @@
-package com.example.final_project.controller;
+package com.example.final_project.controller.entityControllers;
 
 import com.example.final_project.dto.HotelDto;
 import com.example.final_project.entity.Hotel;
@@ -16,10 +16,7 @@ public class HotelController {
     private HotelService hotelService;
 
     @PostMapping("/add")
-//    @ResponseBody
-    public ResponseEntity<Hotel> addHotel(@RequestBody HotelDto hotelDto
-//            , @PathVariable Long roomId
-    ) {
+    public ResponseEntity<Hotel> addHotel(@RequestBody HotelDto hotelDto) {
         Hotel hotel = hotelService.createHotel(hotelDto);
         return ResponseEntity.ok(hotel);
     }
