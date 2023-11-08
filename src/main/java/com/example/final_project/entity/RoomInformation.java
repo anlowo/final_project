@@ -2,6 +2,7 @@ package com.example.final_project.entity;
 
 import com.example.final_project.entity.roomEnums.BedType;
 import com.example.final_project.entity.roomEnums.RoomType;
+
 import javax.persistence.*;
 import lombok.Data;
 
@@ -15,7 +16,7 @@ public class RoomInformation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     @Column(name = "room_type")
     private RoomType roomType;
 

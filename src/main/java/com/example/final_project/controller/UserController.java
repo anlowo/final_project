@@ -4,11 +4,15 @@ import com.example.final_project.entity.User;
 import com.example.final_project.entity.enums.Roles;
 import com.example.final_project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -18,21 +22,31 @@ public class UserController {
     private UserService userService;
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    @GetMapping
-    public String userList(Model model) {
-        model.addAttribute("users", userService.findAll());
-
-        return "userList";
+    @GetMapping("/userList")
+    public ResponseEntity<List<User>> getUsersList() {
+        List<User> users = userService.findAll();
+        return new ResponseEntity<>(users, HttpStatus.OK);
     }
+
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    @GetMapping("{user}")
-    public String userEditForm(@PathVariable User user, Model model) {
-        model.addAttribute("user", user);
-        model.addAttribute("roles", Roles.values());
+    @GetMapping("/userEdit/{userId}")
+    public ResponseEntity<Map<String, Object>> userEditForm(@PathVariable Long userId) {
+        User user = userService.findById(userId);
 
-        return "userEdit";
+        if (user == null) {
+            Map<String, Object> response = new HashMap<>();
+            response.put("error", "User not found");
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("user", user);
+        response.put("roles", Roles.values());
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping

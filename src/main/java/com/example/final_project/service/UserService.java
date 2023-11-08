@@ -11,6 +11,7 @@ import java.util.Map;
 
 public interface UserService extends UserDetailsService {
     UserDetails loadUserByLogin(String login) throws UsernameNotFoundException;
+
     boolean addUser(User user);
 
     boolean activateUser(String code);
@@ -20,4 +21,6 @@ public interface UserService extends UserDetailsService {
     void saveUser(User user, String login, Map<String, String> form);
 
     void updateProfile(User user, String password, String email);
+
+    User findById(Long userId);
 }
