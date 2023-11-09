@@ -1,0 +1,7 @@
+-- CREATE TABLE hotel
+-- (
+--     id         SERIAL PRIMARY KEY,
+--     hotel_name VARCHAR(255),
+--     cts        TIMESTAMP NOT NULL,
+--     uts        TIMESTAMP NOT NULL
+-- );

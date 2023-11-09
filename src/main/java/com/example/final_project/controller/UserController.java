@@ -28,7 +28,6 @@ public class UserController {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/userEdit/{userId}")
     public ResponseEntity<Map<String, Object>> userEditForm(@PathVariable Long userId) {
@@ -47,34 +46,39 @@ public class UserController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-
-    @PreAuthorize("hasAuthority('ADMIN')")
-    @PostMapping
-    public String userSave(
+    @PostMapping("/userSave")
+    public ResponseEntity<Map<String, String>> userSave(
             @RequestParam String username,
             @RequestParam Map<String, String> form,
             @RequestParam("userId") User user
     ) {
         userService.saveUser(user, username, form);
 
-        return "redirect:/user";
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "User saved successfully");
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("profile")
-    public String getProfile(Model model, @AuthenticationPrincipal User user) {
-        model.addAttribute("login", user.getUsername());
+    public ResponseEntity<Map<String, String>> getProfile(@AuthenticationPrincipal User user) {
+        Map<String, String> profileData = new HashMap<>();
+        profileData.put("login", user.getUsername());
 
-        return "profile";
+        return new ResponseEntity<>(profileData, HttpStatus.OK);
     }
 
     @PostMapping("profile")
-    public String updateProfile(
+    public ResponseEntity<Map<String, String>> updateProfile(
             @AuthenticationPrincipal User user,
             @RequestParam String password,
             @RequestParam String email
     ) {
         userService.updateProfile(user, password, email);
 
-        return "redirect:/user/profile";
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Profile updated successfully");
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
