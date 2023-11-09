@@ -1,10 +1,10 @@
 package com.example.final_project.entity;
 
-import javax.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -19,15 +19,10 @@ public class Hotel {
     @Column(name = "hotel_name")
     private String name;
 
-    @Column(name = "number of floors")
-    private Integer numberOfFloors;
-
     @CreationTimestamp
     private LocalDateTime cts;
 
     @UpdateTimestamp
     private LocalDateTime uts;
 
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "hotel")
-//    private List<Room> room;
 }

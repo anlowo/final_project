@@ -20,7 +20,6 @@ public class HotelServiceImpl implements HotelService {
             Hotel hotel = new Hotel();
 
             hotel.setName(hotelDto.getName());
-            hotel.setNumberOfFloors(hotelDto.getNumberOfFloors());
 
             hotelRepository.save(hotel);
 
